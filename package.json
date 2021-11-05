@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Node.js Workshop final project",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "test"
+    "dev": "nodemon index --exec 'npm run lint && node -r dotenv/config --experimental-specifier-resolution=node'",
+    "start": "node",
+    "test": "test",
+    "lint": "eslint --fix --ext .js src"
   },
   "repository": {
     "type": "git",
@@ -23,6 +27,14 @@
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.25.2"
+    "eslint-plugin-import": "^2.25.2",
+    "nodemon": "^2.0.14"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mongodb": "^4.1.4"
   }
 }
