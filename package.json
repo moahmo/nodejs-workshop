@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-workshop",
+  "version": "1.0.0",
+  "description": "Node.js Workshop final project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moahmo/nodejs-workshop.git"
+  },
+  "keywords": [
+    "nodejs",
+    "workshop"
+  ],
+  "author": "macic.ahmet@nsoft.com, dragoje.jadranko@nsoft.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moahmo/nodejs-workshop/issues"
+  },
+  "homepage": "https://github.com/moahmo/nodejs-workshop#readme"
+}
