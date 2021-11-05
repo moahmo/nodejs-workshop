@@ -18,7 +18,7 @@
     "nodejs",
     "workshop"
   ],
-  "author": "macic.ahmet@nsoft.com, dragoje.jadranko@nsoft.com",
+  "author": "moahmo, manico",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/moahmo/nodejs-workshop/issues"
@@ -35,6 +35,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
-    "mongodb": "^4.1.4"
+    "joi": "^17.4.2",
+    "mongodb": "^4.1.4",
+    "uuid": "^8.3.2"
   }
 }
