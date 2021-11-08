@@ -7,7 +7,7 @@
     "dev": "nodemon index --exec 'npm run lint && node -r dotenv/config'",
     "start": "node -r dotenv/config index",
     "test": "jest",
-    "lint": "eslint --fix --ext .js src"
+    "lint": "eslint --ext .js src"
   },
   "repository": {
     "type": "git",
