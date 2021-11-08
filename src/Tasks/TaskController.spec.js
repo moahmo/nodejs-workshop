@@ -4,16 +4,23 @@ const taskStorageService = require('./TaskStorageService');
 jest.mock('./TaskStorageService');
 
 const mockReq = () => {
-  const req = {};
-
-  req.body = jest.fn().mockReturnValue(req);
-  req.params = jest.fn().mockReturnValue(req);
+  const req = {
+    body: {},
+    params: {},
+  };
 
   return req;
 };
 
 const mockRes = () => {
-  const res = {};
+  const res = {
+    locals: {
+      pagination: {
+        limit: 10,
+        offset: 0,
+      },
+    },
+  };
 
   res.send = jest.fn().mockReturnValue(res);
   res.sendStatus = jest.fn().mockReturnValue(res);
@@ -41,7 +48,7 @@ describe('TaskController', () => {
     await taskController.getTasks(mockedReq, mockedRes);
 
     expect(mockedRes.send).toHaveBeenCalledTimes(1);
-    expect(mockedRes.send).toHaveBeenCalledWith({ data: [] });
+    expect(mockedRes.send).toHaveBeenCalledWith({ data: [], pagination: { limit: 10, offset: 0 } });
   });
 
   it('should throw error in getTasks', async () => {
