@@ -18,7 +18,7 @@ const connectToDatabase = async () => {
 
     connection = await client.connect();
   } catch (error) {
-    console.log('MongoConnectionError');
+    console.log('MongoConnectionError', error);
   }
 };
 

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon index --exec 'npm run lint && node -r dotenv/config'",
     "start": "node -r dotenv/config index",
+    "start-compose": "node -r dotenv/config index dotenv_config_path=./.env.local",
     "test": "jest",
     "lint": "eslint --fix --ext .js src"
   },
