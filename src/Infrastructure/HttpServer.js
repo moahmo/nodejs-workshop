@@ -1,12 +1,12 @@
-import express from 'express';
-import helmet from 'helmet';
-import cors from 'cors';
-import taskRouter from '../Tasks/TaskRouter';
+const express = require('express');
+const helmet = require('helmet');
+const cors = require('cors');
+const taskRouter = require('../Tasks/TaskRouter');
 
 const server = express();
 const port = process.env.PORT || 3010;
 
-export default {
+module.exports = {
   start() {
     server.use(helmet());
     server.use(cors({ origin: true, credentials: true }));

@@ -1,20 +1,13 @@
-import { Router } from 'express';
-import {
-  createTask,
-  getTasks,
-  getTaskDetails,
-  deleteTask,
-  createTaskItem,
-  updateTaskItem,
-} from './TaskController';
+const { Router } = require('express');
+const taskController = require('./TaskController');
 
 const taskRouter = Router();
 
-taskRouter.get('/', getTasks);
-taskRouter.post('/', createTask);
-taskRouter.get('/:taskId', getTaskDetails);
-taskRouter.delete('/:taskId', deleteTask);
-taskRouter.post('/:taskId/items', createTaskItem);
-taskRouter.put('/:taskId/items/:itemId', updateTaskItem);
+taskRouter.get('/', taskController.getTasks);
+taskRouter.post('/', taskController.createTask);
+taskRouter.get('/:taskId', taskController.getTaskDetails);
+taskRouter.delete('/:taskId', taskController.deleteTask);
+taskRouter.post('/:taskId/items', taskController.createTaskItem);
+taskRouter.put('/:taskId/items/:itemId', taskController.updateTaskItem);
 
-export default taskRouter;
+module.exports = taskRouter;

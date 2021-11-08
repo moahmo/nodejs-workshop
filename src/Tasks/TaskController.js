@@ -1,17 +1,16 @@
-import {
+const {
   queryTaskDetails,
   queryTasks,
   removeStoredTask,
   storeNewTask,
-  storeNewTaskItem, updateStoredTaskItem,
-} from './TaskStorageService';
-import {
-  validateTask,
-  validateTaskItem,
-} from './TaskValidationService';
-import { getTaskDonePercentage } from './TaskService';
+  storeNewTaskItem,
+  updateStoredTaskItem,
+} = require('./TaskStorageService');
 
-export async function getTasks(req, res) {
+const { validateTask, validateTaskItem } = require('./TaskValidationService');
+const { getTaskDonePercentage } = require('./TaskService');
+
+const getTasks = async (req, res) => {
   try {
     const data = await queryTasks();
 
@@ -21,9 +20,9 @@ export async function getTasks(req, res) {
   } catch {
     res.sendStatus(400);
   }
-}
+};
 
-export async function getTaskDetails(req, res) {
+const getTaskDetails = async (req, res) => {
   try {
     const result = await queryTaskDetails(req.params.taskId);
 
@@ -34,9 +33,9 @@ export async function getTaskDetails(req, res) {
   } catch {
     res.sendStatus(400);
   }
-}
+};
 
-export async function createTask(req, res) {
+const createTask = async (req, res) => {
   try {
     await validateTask(req.body);
     await storeNewTask(req.body);
@@ -49,9 +48,9 @@ export async function createTask(req, res) {
       error,
     });
   }
-}
+};
 
-export async function deleteTask(req, res) {
+const deleteTask = async (req, res) => {
   try {
     const result = await removeStoredTask(req.params.taskId);
 
@@ -59,9 +58,9 @@ export async function deleteTask(req, res) {
   } catch {
     res.sendStatus(400);
   }
-}
+};
 
-export async function createTaskItem(req, res) {
+const createTaskItem = async (req, res) => {
   try {
     await validateTaskItem(req.body);
     const result = await storeNewTaskItem(req.params.taskId, req.body);
@@ -72,9 +71,9 @@ export async function createTaskItem(req, res) {
       error,
     });
   }
-}
+};
 
-export async function updateTaskItem(req, res) {
+const updateTaskItem = async (req, res) => {
   try {
     await validateTaskItem(req.body);
     const result = await updateStoredTaskItem(req.params.taskId, req.params.itemId, req.body);
@@ -83,4 +82,13 @@ export async function updateTaskItem(req, res) {
   } catch {
     res.sendStatus(400);
   }
-}
+};
+
+module.exports = {
+  getTasks,
+  getTaskDetails,
+  createTask,
+  deleteTask,
+  createTaskItem,
+  updateTaskItem,
+};

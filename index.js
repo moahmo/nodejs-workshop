@@ -1,8 +1,5 @@
-import httpServer from './src/Infrastructure/HttpServer.js';
-import {
-  closeDatabaseConnection,
-  connectToDatabase,
-} from './src/Infrastructure/DatabaseConnection.js';
+const httpServer = require('./src/Infrastructure/HttpServer.js');
+const { closeDatabaseConnection, connectToDatabase } = require('./src/Infrastructure/DatabaseConnection.js');
 
 (async () => {
   const cleanup = async () => {

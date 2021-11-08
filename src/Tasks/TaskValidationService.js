@@ -1,4 +1,4 @@
-import Joi from 'joi';
+const Joi = require('joi');
 
 const taskSchema = Joi.object({
   name: Joi.string().required(),
@@ -9,10 +9,15 @@ const taskItemSchema = Joi.object({
   done: Joi.boolean().required(),
 });
 
-export async function validateTask(body) {
+const validateTask = async (body) => {
   await taskSchema.validateAsync(body);
-}
+};
 
-export async function validateTaskItem(body) {
+const validateTaskItem = async (body) => {
   await taskItemSchema.validateAsync(body);
-}
+};
+
+module.exports = {
+  validateTask,
+  validateTaskItem,
+};

@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export function getTaskDonePercentage(task) {
+const getTaskDonePercentage = async (task) => {
   if (task?.items) {
     const { items } = task;
     const numOfItems = items.length;
@@ -10,4 +9,8 @@ export function getTaskDonePercentage(task) {
   }
 
   return 0;
-}
+};
+
+module.exports = {
+  getTaskDonePercentage,
+};

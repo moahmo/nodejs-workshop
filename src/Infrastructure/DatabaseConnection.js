@@ -1,4 +1,4 @@
-import mongo from 'mongodb';
+const mongo = require('mongodb');
 
 let database;
 let connection;
@@ -28,7 +28,7 @@ const closeDatabaseConnection = async () => {
   if (connection) await connection.close();
 };
 
-export {
+module.exports = {
   query,
   connectToDatabase,
   closeDatabaseConnection,
