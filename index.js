@@ -15,7 +15,7 @@ const { closeDatabaseConnection, connectToDatabase } = require('./src/Infrastruc
 
     httpServer.start();
   } catch (e) {
-    console.log('VOCAP', e);
+    console.log('Error', e);
   }
 
   console.log(`Running on ${process.env.NODE_ENV} environment`);
