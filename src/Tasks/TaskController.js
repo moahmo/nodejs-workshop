@@ -16,6 +16,9 @@ const getTasks = async (req, res) => {
 
     res.send({
       data,
+      pagination: {
+        ...res.locals.pagination,
+      },
     });
   } catch (e) {
     res.sendStatus(400);
@@ -27,8 +30,10 @@ const getTaskDetails = async (req, res) => {
     const result = await queryTaskDetails(req.params.taskId);
 
     res.send({
-      percentageDone: getTaskDonePercentage(result),
-      details: result,
+      data: {
+        percentageDone: getTaskDonePercentage(result),
+        result,
+      },
     });
   } catch {
     res.sendStatus(400);
@@ -38,9 +43,10 @@ const getTaskDetails = async (req, res) => {
 const createTask = async (req, res) => {
   try {
     await validateTask(req.body);
-    await storeNewTask(req.body);
+    const task = await storeNewTask(req.body);
 
     res.send({
+      data: task,
       success: true,
     });
   } catch (error) {
@@ -52,9 +58,11 @@ const createTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    const result = await removeStoredTask(req.params.taskId);
+    await removeStoredTask(req.params.taskId);
 
-    res.send(result);
+    res.send({
+      success: true,
+    });
   } catch {
     res.sendStatus(400);
   }

@@ -8,45 +8,69 @@ const queryTasks = async ({
   .find({})
   .skip(offset)
   .limit(limit)
+  .project({
+    _id: false,
+    id: '$_id',
+    name: true,
+    createdAt: true,
+    updatedAt: true,
+    items: true,
+  })
   .toArray();
 
 const queryTaskDetails = async (taskId) => query('tasks').findOne({
   _id: taskId,
 });
 
-const storeNewTask = async (task) => query('tasks').insertOne({
-  _id: uuid(),
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  ...task,
-});
+const storeNewTask = async (task) => {
+  const taskId = uuid();
+
+  await query('tasks').insertOne({
+    _id: taskId,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    ...task,
+  });
+
+  return queryTaskDetails(taskId);
+};
 
 const removeStoredTask = async (taskId) => query('tasks').deleteOne({
   _id: taskId,
 });
 
-const storeNewTaskItem = async (taskId, item) => query('tasks').updateOne({
-  _id: taskId,
-}, {
-  $push: {
-    items: {
-      id: uuid(),
-      updatedAt: new Date(),
-      ...item,
+const storeNewTaskItem = async (taskId, item) => {
+  const result = await query('tasks').findOneAndUpdate({
+    _id: taskId,
+  }, {
+    $push: {
+      items: {
+        id: uuid(),
+        ...item,
+      },
     },
-  },
-});
+  }, {
+    returnDocument: 'after',
+  });
 
-const updateStoredTaskItem = async (taskId, itemId, updatedItem) => query('tasks').updateOne({
-  _id: taskId,
-  'items.id': itemId,
-}, {
-  $set: {
-    updatedAt: new Date(),
-    'items.$.done': updatedItem.done,
-    'items.$.name': updatedItem.name,
-  },
-});
+  return result?.value;
+};
+
+const updateStoredTaskItem = async (taskId, itemId, updatedItem) => {
+  const result = await query('tasks').findOneAndUpdate({
+    _id: taskId,
+    'items.id': itemId,
+  }, {
+    $set: {
+      'items.$.done': updatedItem.done,
+      'items.$.name': updatedItem.name,
+    },
+  }, {
+    returnDocument: 'after',
+  });
+
+  return result?.value;
+};
 
 module.exports = {
   queryTasks,
