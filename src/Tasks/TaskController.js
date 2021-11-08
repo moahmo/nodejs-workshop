@@ -12,12 +12,12 @@ const { getTaskDonePercentage } = require('./TaskService');
 
 const getTasks = async (req, res) => {
   try {
-    const data = await queryTasks();
+    const data = await queryTasks(res.locals.pagination);
 
     res.send({
       data,
     });
-  } catch {
+  } catch (e) {
     res.sendStatus(400);
   }
 };

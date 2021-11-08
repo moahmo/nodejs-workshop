@@ -1,9 +1,10 @@
 const { Router } = require('express');
+const paginationMiddleware = require('../Common/PaginationMiddleware');
 const taskController = require('./TaskController');
 
 const taskRouter = Router();
 
-taskRouter.get('/', taskController.getTasks);
+taskRouter.get('/', paginationMiddleware, taskController.getTasks);
 taskRouter.post('/', taskController.createTask);
 taskRouter.get('/:taskId', taskController.getTaskDetails);
 taskRouter.delete('/:taskId', taskController.deleteTask);

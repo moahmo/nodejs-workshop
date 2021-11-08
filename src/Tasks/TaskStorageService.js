@@ -1,7 +1,14 @@
 const { v4: uuid } = require('uuid');
 const { query } = require('../Infrastructure/DatabaseConnection');
 
-const queryTasks = async () => query('tasks').find({}).toArray();
+const queryTasks = async ({
+  limit,
+  offset,
+}) => query('tasks')
+  .find({})
+  .skip(offset)
+  .limit(limit)
+  .toArray();
 
 const queryTaskDetails = async (taskId) => query('tasks').findOne({
   _id: taskId,
@@ -9,6 +16,8 @@ const queryTaskDetails = async (taskId) => query('tasks').findOne({
 
 const storeNewTask = async (task) => query('tasks').insertOne({
   _id: uuid(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
   ...task,
 });
 
@@ -22,6 +31,7 @@ const storeNewTaskItem = async (taskId, item) => query('tasks').updateOne({
   $push: {
     items: {
       id: uuid(),
+      updatedAt: new Date(),
       ...item,
     },
   },
@@ -32,6 +42,7 @@ const updateStoredTaskItem = async (taskId, itemId, updatedItem) => query('tasks
   'items.id': itemId,
 }, {
   $set: {
+    updatedAt: new Date(),
     'items.$.done': updatedItem.done,
     'items.$.name': updatedItem.name,
   },
