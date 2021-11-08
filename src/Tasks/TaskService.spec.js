@@ -12,7 +12,7 @@ describe('TaskService', () => {
       items: [
         { done: false },
         { done: true },
-        { done: false }
+        { done: false },
       ],
     });
 
