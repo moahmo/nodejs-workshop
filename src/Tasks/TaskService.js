@@ -1,4 +1,4 @@
-const getTaskDonePercentage = async (task) => {
+const getTaskDonePercentage = (task) => {
   if (task?.items) {
     const { items } = task;
     const numOfItems = items.length;

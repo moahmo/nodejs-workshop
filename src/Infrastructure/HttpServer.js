@@ -4,7 +4,7 @@ const cors = require('cors');
 const taskRouter = require('../Tasks/TaskRouter');
 
 const server = express();
-const port = process.env.PORT || 3010;
+const port = Number(process.env.PORT || 3010);
 
 module.exports = {
   start() {
@@ -12,6 +12,7 @@ module.exports = {
     server.use(cors({ origin: true, credentials: true }));
     server.use(express.json());
 
+    server.get('/', (req, res) => { res.json({ port }); });
     server.use('/tasks', taskRouter);
 
     server.listen(port, () => {
