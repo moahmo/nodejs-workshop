@@ -1,0 +1,25 @@
+version: "3.5"
+services:
+  nodejs_workshop_mongo:
+    container_name: nodejs_workshop_mongo
+    image: mongo:latest
+    env_file:
+      - .env.local
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: RootPassword
+    ports:
+      - 27017:27017
+  nodejs_workshop_app:
+    container_name: nodejs_workshop_app
+    env_file:
+      - .env.local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      nodejs_workshop_mongo:
+        condition: service_started
+    ports:
+      - 3000:3000
+    command: npm run start-compose
