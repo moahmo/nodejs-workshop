@@ -1,9 +1,19 @@
 # Node.js Starter Workshop
 
-Node.js Workshop for beginners.
+This is the final result for Node.js Starter Workshop project.
+If you've been visiting these workshops, this is how your own project should look like.
 
-# Run in Docker
+Workshop Instructors / Project Authors: [moahmo](https://github.com/moahmo), [manico](https://github.com/manico)
 
-- `docker build -t nodejs_workshop .`
-- `docker run -p 3000:3000 nodejs_workshop`
+## Run
+```
+$ npm install
+$ npm run dev
+```
 
+## Run in Docker
+
+```
+$ docker build -t nodejs_workshop .
+$ docker run -p 3000:3000 nodejs_workshop
+```
