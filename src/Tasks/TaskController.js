@@ -32,7 +32,7 @@ const getTaskDetails = async (req, res) => {
     res.send({
       data: {
         percentageDone: getTaskDonePercentage(result),
-        result,
+        ...result,
       },
     });
   } catch {
